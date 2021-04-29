@@ -9,10 +9,11 @@ class DictManager(MutableMapping):
         self._data = {}
         tree = os.walk(rootf)
         for i in tree:
-            # print(i)
+            print(i)
             if i[0] == self._path:
                 for file in i[2]:
-                    self._data[file] = 'текст'
+                    with open(os.path.abspath(f"{file}"), "r") as f:
+                        self._data[file] = f.read()
                 for dir in i[1]:
                     self._data[dir] = {}
             else:
